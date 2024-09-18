@@ -1,0 +1,13 @@
+{
+  "dependencies": {},
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  },"workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "install:all": "bun install",
+    "dev": "concurrently \"bun run --cwd frontend dev\" \"bun run --cwd backend dev\"" 
+  }
+}
