@@ -1,3 +1,4 @@
+import { FormEvent } from "react";
 import Nav from "../components/Nav";
 export default function Home() {
   const convert_types = [
@@ -8,6 +9,37 @@ export default function Home() {
     { name: 'temperature' }
   ]
 
+  type inputElement = HTMLInputElement | null
+  interface Data {
+    amount_to_convert: inputElement;
+    unit_convert_from: inputElement;
+    unit_convert_to: inputElement;
+  }
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault()
+    console.log('got the submit..')
+    const amount_to_convert = document.getElementById('amount_to_convert')
+    const unit_convert_from = document.getElementById('unit_convert_from')
+    const unit_convert_to = document.getElementById('unit_convert_to')
+
+    if (amount_to_convert && unit_convert_from && unit_convert_to) {
+      try {
+        console.log('trying...')
+
+        const response = await fetch('http://localhost:8080/api', {
+          method: 'POST',
+          body: JSON.stringify({ hello: 'hello' })
+        })
+        console.log('reponse..')
+        console.log(response)
+      }
+
+      catch (error) {
+        console.log('Well one of these values must be wrong')
+        console.log(error)
+      }
+    }
+  }
   return (
     <>
       <Nav />
@@ -34,7 +66,7 @@ export default function Home() {
             <label htmlFor="unit_convert_to">
               Unit to convert to
             </label>
-            <input type="text" id="unit_to_convert">
+            <input type="text" id="unit_convert_to">
             </input>
             <button className="p-2 bg-white rounded-md border border-2 active:text-blue-800" onClick={handleSubmit}>Submit</button>
           </form>
