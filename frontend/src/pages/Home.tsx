@@ -58,18 +58,24 @@ export default function Home() {
             <label htmlFor="amount_to_convert">
               Amount to convert
             </label>
-            <input type="text" id="amount_to_convert">
+            <input type="text" id="amount_to_convert" className="p-2" min={1} placeholder="Amount to convert" required>
             </input>
             <label htmlFor="unit_convert_from">
               Unit to convert from
             </label>
-            <input type="text" id="unit_convert_from">
-            </input>
-            <label htmlFor="unit_convert_to">
+            <select className="p-2" id="unit_convert_from" required>
+              <option value="hi">hi</option>
+              <option value="hello">hello</option>
+              <option value="me">me</option>
+            </select>
+            <label htmlFor="unit_convert_from">
               Unit to convert to
             </label>
-            <input type="text" id="unit_convert_to">
-            </input>
+            <select className="p-2" id="unit_convert_to" required>
+              <option value="hi">hi</option>
+              <option value="hello">hello</option>
+              <option value="me">me</option>
+            </select>
             <button className="p-2 bg-white rounded-md border border-2 active:text-blue-800" onClick={handleSubmit}>Submit</button>
           </form>
         </div>
