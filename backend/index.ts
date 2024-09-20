@@ -8,8 +8,9 @@ const port = process.env.PORT || 8080
 app.use(cors())
 app.use(express.json());
 app.post('/api', (req, res) => {
+  console.log('Request fromt frontend on backend print...')
   console.log(req.body)
-  res.json(hello: 'hi')
+  res.json({ hello: 'hi' })
 })
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`)

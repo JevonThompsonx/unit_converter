@@ -28,11 +28,13 @@ export default function Home() {
 
         const response = await fetch('http://localhost:8080/api', {
           method: 'POST',
-          Content-Type: "application/json"
+          headers: {
+            'Content-Type': "application/json"
+          },
           body: JSON.stringify({ hello: 'hello' })
         })
-        console.log('reponse..')
-        console.log(response)
+        console.log('reponse from backend printing on frontend')
+        console.log(await response.json())
       }
 
       catch (error) {
