@@ -28,6 +28,7 @@ export default function Home() {
 
         const response = await fetch('http://localhost:8080/api', {
           method: 'POST',
+          Content-Type: "application/json"
           body: JSON.stringify({ hello: 'hello' })
         })
         console.log('reponse..')
