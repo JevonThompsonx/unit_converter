@@ -9,21 +9,20 @@ export default function Home() {
     { name: 'temperature' }
   ]
 
-  type inputElement = HTMLInputElement | null
-  interface Data {
-    amount_to_convert: inputElement;
-    unit_convert_from: inputElement;
-    unit_convert_to: inputElement;
-  }
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     console.log('got the submit..')
-    const amount_to_convert = document.getElementById('amount_to_convert')
-    const unit_convert_from = document.getElementById('unit_convert_from')
-    const unit_convert_to = document.getElementById('unit_convert_to')
+    const amount_to_convert = document.getElementById('amount_to_convert') as HTMLInputElement
+    const unit_convert_from = document.getElementById('unit_convert_from') as HTMLInputElement
+    const unit_convert_to = document.getElementById('unit_convert_to') as HTMLInputElement
 
     if (amount_to_convert && unit_convert_from && unit_convert_to) {
       try {
+        const data = {
+          amount_to_convert: parseInt(amount_to_convert.value),
+          unit_convert_from: unit_convert_from.value,
+          unit_convert_to: unit_convert_to.value
+        }
         console.log('trying...')
 
         const response = await fetch('http://localhost:8080/api', {
@@ -31,7 +30,7 @@ export default function Home() {
           headers: {
             'Content-Type': "application/json"
           },
-          body: JSON.stringify({ hello: 'hello' })
+          body: JSON.stringify({ ...data })
         })
         console.log('reponse from backend printing on frontend')
         console.log(await response.json())
