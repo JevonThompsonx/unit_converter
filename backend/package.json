@@ -3,7 +3,7 @@
   "module": "index.ts",
   "type": "module",
   "scripts": {
-    "dev": "bun --hot ./index.ts"
+    "dev": "bun --watch run ./index.ts"
   },
   "devDependencies": {
     "@types/bun": "^1.1.9",
@@ -15,6 +15,6 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.21.0"
+    "hono": "^4.6.2"
   }
 }
