@@ -9,7 +9,7 @@ app.use(cors())
 app.use(express.json());
 app.post('/api', (req, res) => {
   console.log(req.body)
-  res.send('hi')
+  res.json(hello: 'hi')
 })
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`)
