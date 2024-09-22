@@ -44,12 +44,12 @@ export default function Home() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     console.log('got the submit..')
-    if (amount_to_convert.value && unit_convert_from.value && unit_convert_to.value) {
+    if (amount_to_convert.current?.value && unit_convert_from.current?.value && unit_convert_to.current?.value) {
       try {
         const data = {
-          amount_to_convert: parseInt(amount_to_convert.value),
-          unit_convert_from: unit_convert_from.value,
-          unit_convert_to: unit_convert_to.value
+          amount_to_convert: parseInt(amount_to_convert.current?.value),
+          unit_convert_from: unit_convert_from.current?.value,
+          unit_convert_to: unit_convert_to.current?.value
         }
         console.log('trying...')
 
