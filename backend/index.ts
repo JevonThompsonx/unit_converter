@@ -1,6 +1,6 @@
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
-const app = new Hono().basePath("/api"
+const app = new Hono().basePath("/api")
 
 // app.use('/static/*', serveStatic({ root: './' }))
 // ^ how you'd go about serving static files in a folder named 'static'
