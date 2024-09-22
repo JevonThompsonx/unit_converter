@@ -6,6 +6,7 @@ import { ValidSpan, InValidSpan } from "../components/ValiditySpans";
 /* 
 Todo: 
 [] Make the unit conversion types ['length', 'weight', 'temperature'] clickable so that the application state changes to display different units to convert from & to according to that state, start w/ default state of length
+[] Add active selected conversion type signifier like a text & border color change
 [x] Add key prop to unit conversion types 
 [] Add converter module to actually be able to convert given values
 [] Make conversions work
