@@ -2,6 +2,20 @@ import { FormEvent, useRef } from "react";
 import Nav from "../components/Nav";
 import { useState } from "react";
 import { ValidSpan, InValidSpan } from "../components/ValiditySpans";
+
+/* 
+Todo: 
+[] Make the unit conversion types ['length', 'weight', 'temperature'] clickable so that the application state changes to display different units to convert from & to according to that state, start w/ default state of length
+[x] Add key prop to unit conversion types 
+[] Add converter module to actually be able to convert given values
+[] Make conversions work
+[] Review & Error handling  
+[] Ask chatgpt if there if there are any issues w/ the code
+[] Final review 
+[] Make it pretty 
+
+*/
+
 export default function Home() {
   const convert_types = [
     {
@@ -41,6 +55,9 @@ export default function Home() {
     }
     setValidity({ ...tempValidity })
   }
+  type ConversionType = 'length' | 'weight' | 'temperature';
+  const [conversionType, setConversionType] = useState<ConversionType>('length')
+  // to do: use this to change the conversion to & from that renders
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     console.log('got the submit..')
@@ -81,7 +98,7 @@ export default function Home() {
           <h1 className="text-3xl">Unit Converter</h1>
           <div id="convert_type " className="flex flex-row justify-evenly items-center space-x-2">
             {convert_types.map((item) => {
-              return <div><p>{item.name}</p>
+              return <div key={item.name} ><button className="p-2 border-black border-2 rounded">{item.name}</button>
               </div>
             })}
           </div>
