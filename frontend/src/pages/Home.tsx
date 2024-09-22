@@ -69,6 +69,9 @@ export default function Home() {
         console.log(error)
       }
     }
+    else {
+      console.log('Error w/ given data')
+    }
   }
   return (
     <>
