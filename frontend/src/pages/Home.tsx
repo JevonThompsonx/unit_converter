@@ -2,13 +2,13 @@ import { FormEvent, useRef } from "react";
 import Nav from "../components/Nav";
 import { useState } from "react";
 import { ValidSpan, InValidSpan } from "../components/ValiditySpans";
-
+import units from '../vars/units'
 /* 
 ## Todo: 
 [] Make the unit conversion types ['length', 'weight', 'temperature'] clickable so that the application state changes to display different units to convert from & to according to that state, start w/ default state of length
 [] Add active selected conversion type signifier like a text & border color change
 [x] Add key prop to unit conversion types 
-[] Add converter module to actually be able to convert given values
+[x] Add converter module to actually be able to convert given values
 [] Make conversions work
 [] Review & Error handling  
 [] Ask chatgpt if there if there are any issues w/ the code
@@ -32,13 +32,7 @@ Mass/weigt : mcg, mg,g,kg,oz,lb,mt,t
 */
 
 export default function Home() {
-  const convert_types = [
-    {
-      name: 'length'
-    },
-    { name: 'weight' },
-    { name: 'temperature' }
-  ]
+
   const amount_to_convert = useRef<HTMLInputElement>(null)
   const unit_convert_from = useRef<HTMLSelectElement>(null)
   const unit_convert_to = useRef<HTMLSelectElement>(null)
@@ -71,8 +65,25 @@ export default function Home() {
     setValidity({ ...tempValidity })
   }
   type ConversionType = 'length' | 'weight' | 'temperature';
-  const [conversionType, setConversionType] = useState<ConversionType>('length')
-  // to do: use this to change the conversion to & from that renders
+
+
+  interface Unit_Types {
+    'length': { active: boolean },
+    'weight': { active: boolean },
+    'temperature': { active: boolean }
+  }
+  const default_unit_types = {
+    'length': { active: true },
+    'weight': { active: false },
+    'temperature': { active: false }
+  }
+  const [unit_types, setUnitTypes] = useState<Unit_Types>(default_unit_types)
+
+  const handleUnitType = () => {
+    return
+    //to do : figure out how to use state to change which unit is colored on click
+  }
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     console.log('got the submit..')
@@ -112,9 +123,10 @@ export default function Home() {
         <div id="converter_base" className="flex flex-col justify-evenly items-center border border-black border-2 p-6 space-y-6">
           <h1 className="text-3xl">Unit Converter</h1>
           <div id="convert_type " className="flex flex-row justify-evenly items-center space-x-2">
-            {convert_types.map((item) => {
-              return <div key={item.name} ><button className="p-2 border-black border-2 rounded">{item.name}</button>
-              </div>
+            {Object.entries(unit_types).map((item) => {
+              return < button key={item[0]} className={`p-2 ${item[1].active ? 'border-blue-500' : 'border-black'} border-2 rounded`}
+              //onClick={}
+              >{item[0]}</button>
             })}
           </div>
           <form action="/convert" className="flex flex-col space-y-2 p-2">
