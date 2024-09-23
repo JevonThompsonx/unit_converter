@@ -4,7 +4,7 @@ import { useState } from "react";
 import { ValidSpan, InValidSpan } from "../components/ValiditySpans";
 
 /* 
-Todo: 
+## Todo: 
 [] Make the unit conversion types ['length', 'weight', 'temperature'] clickable so that the application state changes to display different units to convert from & to according to that state, start w/ default state of length
 [] Add active selected conversion type signifier like a text & border color change
 [x] Add key prop to unit conversion types 
@@ -14,6 +14,20 @@ Todo:
 [] Ask chatgpt if there if there are any issues w/ the code
 [] Final review 
 [] Make it pretty 
+
+## Planned units
+
+Length: millimeter, centimeter, meter, kilometer, inch, foot, yard, mile.
+Weight: milligram, gram, kilogram, ounce, pound.
+Temperature: Celsius, Fahrenheit, Kelvin.
+
+## Available units 
+
+Temperature : C,F,K,R
+
+Length: mm,cm,m,in,ft-us,ft,mi
+
+Mass/weigt : mcg, mg,g,kg,oz,lb,mt,t
 
 */
 
