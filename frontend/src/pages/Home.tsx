@@ -82,7 +82,7 @@ export default function Home() {
     'weight': { active: false },
     'temperature': { active: false }
   }
-  const [unit_types, setUnitTypes] = useState<Unit_Types>(default_unit_types)
+  const [unitTypes, setUnitTypes] = useState<Unit_Types>({ ...default_unit_types })
 
 
   const handleUnitType = (e: React.KeyboardEvent<HTMLButtonElement> | React.MouseEvent<HTMLButtonElement>) => {
@@ -90,18 +90,22 @@ export default function Home() {
     const currentUnit = e.target
     switch (currentUnit.id) {
       case 'weight':
-        setUnitTypes({ ...inactive_unit_types, weight: { active: true } })
+        setUnitTypes({ ...inactive_unit_types, 'weight': { active: true } })
         break;
       case 'length':
-        setUnitTypes({ ...inactive_unit_types, length: { active: true } })
+        setUnitTypes({ ...inactive_unit_types, 'length': { active: true } })
         break;
       case 'temperature':
-        setUnitTypes({ ...inactive_unit_types, temperature: { active: true } })
+        setUnitTypes({ ...inactive_unit_types, 'temperature': { active: true } })
         break;
       //to do : figure out how to use state to change which unit is colored on click
     }
   }
-
+  const UnitComponent = () => {
+    Object.entries(units.length).map((item) => {
+      return <option value="{item[1]}" key={item[0]}>{item[0]}</option>
+    })
+  }
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     console.log('got the submit..')
@@ -134,6 +138,38 @@ export default function Home() {
       console.log('Error w/ given data')
     }
   }
+  const UnitsComponent = () => {
+    if (unitTypes.length.active) {
+      return (
+        <>
+          <option value="" >--please choose an option--</option>
+          {Object.entries(units.length).map((item) => {
+            return <option value={item[1]} key={item[0]}>{item[0]}</option>
+          })}
+        </>
+      )
+    }
+    if (unitTypes.weight.active) {
+      return (
+        <>
+          <option value="" >--please choose an option--</option>
+          {Object.entries(units.weight).map((item) => {
+            return <option value={item[1]} key={item[0]}>{item[0]}</option>
+          })}
+        </>
+      )
+    }
+    if (unitTypes.temperature.active) {
+      return (
+        <>
+          <option value="" >--please choose an option--</option>
+          {Object.entries(units.temperature).map((item) => {
+            return <option value={item[1]} key={item[0]}>{item[0]}</option>
+          })}
+        </>
+      )
+    }
+  }
   return (
     <>
       <Nav />
@@ -141,7 +177,7 @@ export default function Home() {
         <div id="converter_base" className="flex flex-col justify-evenly items-center border border-black border-2 p-6 space-y-6">
           <h1 className="text-3xl">Unit Converter</h1>
           <div id="convert_type " className="flex flex-row justify-evenly items-center space-x-2">
-            {Object.entries(unit_types).map((item) => {
+            {Object.entries(unitTypes).map((item) => {
               return <button key={item[0]} id={item[0]} className={`p-2 ${item[1].active ? 'border-blue-500' : 'border-black'} border-2 rounded`}
                 onClick={handleUnitType}
               >{item[0]}</button>
@@ -168,10 +204,7 @@ export default function Home() {
 
             <div className="flex flex-row justify-evenly space-x-2 items-center">
               <select className="p-2 invalid:text-red-500 focus:border-blue-500 valid:text-green-600" id="unit_convert_from" name="unit_convert_from" required value={undefined} onBlur={checkValidity} onChange={checkValidity} ref={unit_convert_from}>
-                <option value="" >--please choose an option--</option>
-                <option value="hi">hi</option>
-                <option value="hello">hello</option>
-                <option value="me">me</option>
+                <UnitsComponent />
               </select>
               {
                 validity.from ?
@@ -185,10 +218,7 @@ export default function Home() {
 
             <div className="flex flex-row justify-evenly space-x-2 items-center">
               <select className="p-2 invalid:text-red-500 focus:border-blue-500 valid:text-green-600" id="unit_convert_to" name="unit_convert_to" required value={undefined} onBlur={checkValidity} onChange={checkValidity} ref={unit_convert_to}>
-                <option value="" >--please choose an option--</option>
-                <option value="hi">hi</option>
-                <option value="hello">hello</option>
-                <option value="me">me</option>
+                <UnitsComponent />
               </select>
               {
                 validity.to ?

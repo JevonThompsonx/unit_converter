@@ -23,4 +23,4 @@ const units = {
   }
 }
 
-export default units 
+export default units
