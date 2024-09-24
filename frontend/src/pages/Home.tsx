@@ -1,4 +1,4 @@
-import { EventHandler, FormEvent, ReactEventHandler, useRef } from "react";
+import { FormEvent, useRef } from "react";
 import Nav from "../components/Nav";
 import { useState } from "react";
 import { ValidSpan, InValidSpan } from "../components/ValiditySpans";
@@ -32,21 +32,22 @@ Mass/weigt : mcg, mg,g,kg,oz,lb,mt,t
 */
 
 export default function Home() {
-
+  //define vars for usage 
   const amount_to_convert = useRef<HTMLInputElement>(null)
   const unit_convert_from = useRef<HTMLSelectElement>(null)
   const unit_convert_to = useRef<HTMLSelectElement>(null)
+  //vadility type handling
   type validity = null | 'valid'
   interface ValidityObject {
     amount: validity;
     to: validity;
     from: validity
   }
+  // starter validity object
   const StarterValdity: ValidityObject = { amount: null, from: null, to: null }
   const [validity, setValidity] = useState<ValidityObject>({ ...StarterValdity })
-  const [toValue, setToValue] = useState('')
-  const [fromValue, setFromValue] = useState('')
 
+  //validity checker
   const checkValidity = () => {
     const tempValidity: ValidityObject = { ...StarterValdity }
     if (amount_to_convert.current?.value) {
@@ -66,6 +67,9 @@ export default function Home() {
     }
     setValidity({ ...tempValidity })
   }
+  // to & from value state
+  const [toValue, setToValue] = useState('')
+  const [fromValue, setFromValue] = useState('')
   const handleToValue = (e: React.ChangeEvent<HTMLSelectElement>) => {
     checkValidity()
     setToValue(e.target.value)
@@ -74,14 +78,13 @@ export default function Home() {
     checkValidity()
     setFromValue(e.target.value)
   }
-  type ConversionType = 'length' | 'weight' | 'temperature';
-
-
+  //conversion type handling 
   interface Unit_Types {
     'length': { active: boolean },
     'weight': { active: boolean },
     'temperature': { active: boolean }
   }
+  // unit state 
   const default_unit_types = {
     'length': { active: true },
     'weight': { active: false },
@@ -94,11 +97,10 @@ export default function Home() {
   }
   const [unitTypes, setUnitTypes] = useState<Unit_Types>({ ...default_unit_types })
 
-
+  // unit converter state 
   const handleUnitType = (e: React.KeyboardEvent<HTMLButtonElement> | React.MouseEvent<HTMLButtonElement>) => {
-    console.log(e.target)
-    const currentUnit = e.target
-    switch (currentUnit.id) {
+    //console.log(e.target)
+    switch ((e.target as HTMLButtonElement).id) {
       case 'weight':
         setUnitTypes({ ...inactive_unit_types, 'weight': { active: true } })
         break;
@@ -111,7 +113,7 @@ export default function Home() {
       //to do : figure out how to use state to change which unit is colored on click
     }
   }
-
+  // form submit
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     console.log('got the submit..')
@@ -194,7 +196,7 @@ export default function Home() {
               Amount to convert
             </label>
             <div className="flex flex-row justify-evenly space-x-2 items-center">
-              <input type="text" id="amount_to_convert" name="amount_to_convert" className="p-2 invalid:text-red-500 focus:border-blue-500 valid:text-green-600" min={1} placeholder="Amount to convert" required onChange={checkValidity} onBlur={checkValidity} ref={amount_to_convert}>
+              <input type="number" id="amount_to_convert" name="amount_to_convert" className="p-2 invalid:text-red-500 focus:border-blue-500 valid:text-green-600" min={1} placeholder="Amount to convert" required onChange={checkValidity} onBlur={checkValidity} ref={amount_to_convert}>
 
               </input>
               {
