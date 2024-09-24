@@ -44,6 +44,8 @@ export default function Home() {
   }
   const StarterValdity: ValidityObject = { amount: null, from: null, to: null }
   const [validity, setValidity] = useState<ValidityObject>({ ...StarterValdity })
+  const [toValue, setToValue] = useState('')
+  const [fromValue, setFromValue] = useState('')
 
   const checkValidity = () => {
     const tempValidity: ValidityObject = { ...StarterValdity }
@@ -63,6 +65,14 @@ export default function Home() {
       tempValidity.to = null
     }
     setValidity({ ...tempValidity })
+  }
+  const handleToValue = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    checkValidity()
+    setToValue(e.target.value)
+  }
+  const handleFromValue = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    checkValidity()
+    setFromValue(e.target.value)
   }
   type ConversionType = 'length' | 'weight' | 'temperature';
 
@@ -101,11 +111,7 @@ export default function Home() {
       //to do : figure out how to use state to change which unit is colored on click
     }
   }
-  const UnitComponent = () => {
-    Object.entries(units.length).map((item) => {
-      return <option value="{item[1]}" key={item[0]}>{item[0]}</option>
-    })
-  }
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     console.log('got the submit..')
@@ -203,7 +209,7 @@ export default function Home() {
             </label>
 
             <div className="flex flex-row justify-evenly space-x-2 items-center">
-              <select className="p-2 invalid:text-red-500 focus:border-blue-500 valid:text-green-600" id="unit_convert_from" name="unit_convert_from" required value={undefined} onBlur={checkValidity} onChange={checkValidity} ref={unit_convert_from}>
+              <select className="p-2 invalid:text-red-500 focus:border-blue-500 valid:text-green-600" id="unit_convert_from" name="unit_convert_from" required value={fromValue} onBlur={checkValidity} onChange={handleFromValue} ref={unit_convert_from}>
                 <UnitsComponent />
               </select>
               {
@@ -217,7 +223,7 @@ export default function Home() {
             </label>
 
             <div className="flex flex-row justify-evenly space-x-2 items-center">
-              <select className="p-2 invalid:text-red-500 focus:border-blue-500 valid:text-green-600" id="unit_convert_to" name="unit_convert_to" required value={undefined} onBlur={checkValidity} onChange={checkValidity} ref={unit_convert_to}>
+              <select className="p-2 invalid:text-red-500 focus:border-blue-500 valid:text-green-600" id="unit_convert_to" name="unit_convert_to" required value={toValue} onBlur={checkValidity} onChange={handleToValue} ref={unit_convert_to}>
                 <UnitsComponent />
               </select>
               {
@@ -228,7 +234,7 @@ export default function Home() {
             </div>
             <button className="p-2 bg-white rounded-md border border-2 active:text-blue-800" onClick={handleSubmit}>Submit</button>
           </form>
-        </div>
+        </div >
       </div >
     </>)
 }
