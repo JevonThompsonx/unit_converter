@@ -11,6 +11,5 @@
     "backend"
   ],
   "dependencies": {
-    "convert-units": "^2.3.4"
   }
 }

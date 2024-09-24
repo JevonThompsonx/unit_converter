@@ -1,4 +1,4 @@
-import { FormEvent, useRef } from "react";
+import { EventHandler, FormEvent, ReactEventHandler, useRef } from "react";
 import Nav from "../components/Nav";
 import { useState } from "react";
 import { ValidSpan, InValidSpan } from "../components/ValiditySpans";
@@ -77,11 +77,29 @@ export default function Home() {
     'weight': { active: false },
     'temperature': { active: false }
   }
+  const inactive_unit_types = {
+    'length': { active: false },
+    'weight': { active: false },
+    'temperature': { active: false }
+  }
   const [unit_types, setUnitTypes] = useState<Unit_Types>(default_unit_types)
 
-  const handleUnitType = () => {
-    return
-    //to do : figure out how to use state to change which unit is colored on click
+
+  const handleUnitType = (e: React.KeyboardEvent<HTMLButtonElement> | React.MouseEvent<HTMLButtonElement>) => {
+    console.log(e.target)
+    const currentUnit = e.target
+    switch (currentUnit.id) {
+      case 'weight':
+        setUnitTypes({ ...inactive_unit_types, weight: { active: true } })
+        break;
+      case 'length':
+        setUnitTypes({ ...inactive_unit_types, length: { active: true } })
+        break;
+      case 'temperature':
+        setUnitTypes({ ...inactive_unit_types, temperature: { active: true } })
+        break;
+      //to do : figure out how to use state to change which unit is colored on click
+    }
   }
 
   const handleSubmit = async (e: FormEvent) => {
@@ -124,8 +142,8 @@ export default function Home() {
           <h1 className="text-3xl">Unit Converter</h1>
           <div id="convert_type " className="flex flex-row justify-evenly items-center space-x-2">
             {Object.entries(unit_types).map((item) => {
-              return < button key={item[0]} className={`p-2 ${item[1].active ? 'border-blue-500' : 'border-black'} border-2 rounded`}
-              //onClick={}
+              return <button key={item[0]} id={item[0]} className={`p-2 ${item[1].active ? 'border-blue-500' : 'border-black'} border-2 rounded`}
+                onClick={handleUnitType}
               >{item[0]}</button>
             })}
           </div>
