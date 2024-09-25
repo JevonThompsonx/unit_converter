@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ValidSpan, InValidSpan } from "../components/ValiditySpans";
 import units from '../vars/units'
 
+import AmountInput from "../components/AmountInput"
 import UnitsComponent from "../components/UnitsComponent"
 /* 
 ## Todo: 
@@ -184,19 +185,8 @@ export default function Home() {
             })}
           </div>
           <form action="/convert" className="flex flex-col space-y-2 p-2">
-            <label htmlFor="amount_to_convert">
-              Amount to convert
-            </label>
-            <div className="flex flex-row justify-evenly space-x-2 items-center">
-              <input type="number" id="amount_to_convert" name="amount_to_convert" className="p-2 invalid:text-red-500 focus:border-blue-500 valid:text-green-600" min={1} placeholder="Amount to convert" required onChange={checkValidity} onBlur={checkValidity} ref={amount_to_convert} >
 
-              </input>
-              {
-                validity.amount ?
-                  <ValidSpan /> :
-                  <InValidSpan />
-              }
-            </div>
+            <AmountInput amount_to_convert={amount_to_convert} checkValidity={checkValidity} ValidInput={ValidInput} InValidInput={InValidInput} />
 
             <label htmlFor="unit_convert_from">
               Unit to convert from
