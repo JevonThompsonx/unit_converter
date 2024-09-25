@@ -1,29 +1,40 @@
-export default ({ units, unitTypes }) => {
+
+export default function UnitSelector({ units, unitTypes }) {
   return (
     <>
-      if (unitTypes.length.active) {
+      {unitTypes.length.active && (
         <>
-          <option value="" >--please choose an option--</option>
-          {Object.entries(units.length).map((item) => {
-            return <option value={item[1]} key={item[0]}>{item[0]}</option>
-          })}
+          <option value="">--please choose an option--</option>
+          {Object.entries(units.length).map((item) => (
+            <option value={item[1]} key={item[0]}>
+              {item[0]}
+            </option>
+          ))}
         </>
-      }
-      if (unitTypes.weight.active) {
+      )}
+
+      {unitTypes.weight.active && (
         <>
-          <option value="" >--please choose an option--</option>
-          {Object.entries(units.weight).map((item) => {
-            return <option value={item[1]} key={item[0]}>{item[0]}</option>
-          })}
+          <option value="">--please choose an option--</option>
+          {Object.entries(units.weight).map((item) => (
+            <option value={item[1]} key={item[0]}>
+              {item[0]}
+            </option>
+          ))}
         </>
-      }
-      if (unitTypes.temperature.active) {
+      )}
+
+      {unitTypes.temperature.active && (
         <>
-          <option value="" >--please choose an option--</option>
-          {Object.entries(units.temperature).map((item) => {
-            return <option value={item[1]} key={item[0]}>{item[0]}</option>
-          })}
+          <option value="">--please choose an option--</option>
+          {Object.entries(units.temperature).map((item) => (
+            <option value={item[1]} key={item[0]}>
+              {item[0]}
+            </option>
+          ))}
         </>
-      }
-    </>)
+      )}
+    </>
+  );
 }
+
