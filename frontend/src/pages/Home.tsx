@@ -6,8 +6,8 @@ import units from '../vars/units'
 
 import AmountInput from "../components/AmountInput"
 import UnitsComponent from "../components/UnitsComponent"
-import FromSelext from "../components/FromSelect"
-import ToSelext from "../components/ToSelect"
+import FromSelect from "../components/FromSelect"
+import ToSelect from "../components/ToSelect"
 /* 
 ## Todo: 
 [] Make the unit conversion types ['length', 'weight', 'temperature'] clickable so that the application state changes to display different units to convert from & to according to that state, start w/ default state of length
@@ -188,15 +188,25 @@ export default function Home() {
           </div>
           <form action="/convert" className="flex flex-col space-y-2 p-2">
 
-            <AmountInput amount_to_convert={amount_to_convert} checkValidity={checkValidity} ValidInput={ValidInput} InValidInput={InValidInput} validity={{...validity}} />
+            <AmountInput amount_to_convert={amount_to_convert}
+              checkValidity={checkValidity} ValidSpan={ValidSpan}
+              InValidSpan={InValidSpan} validity={{ ...validity }} />
 
-<FromSelect checkValidity={checkValidity} ValidInput={ValidInput} InValidInput={InValidInput} validity={{...validity}}
-fromValue={fromValue} 
-handleFromValue={handleFromValue}
-unit_convert_from={unit_convert_from}
- /> 
+            <FromSelect
+              checkValidity={checkValidity}
+              ValidSpan={ValidSpan} InValidSpan={InValidSpan} validity={{ ...validity }}
+              UnitsComponent={UnitsComponent}
+              units={units} unitTypes={unitTypes}
+              fromValue={fromValue} handleFromValue={handleFromValue}
+              unit_convert_from={unit_convert_from}
+            />
 
-           <ToSelect />
+            <ToSelect checkValidity={checkValidity}
+              ValidSpan={ValidSpan} InValidSpan={InValidSpan} validity={{ ...validity }}
+              UnitsComponent={UnitsComponent}
+              units={units} unitTypes={unitTypes}
+              toValue={toValue} handleToValue={handleToValue}
+              unit_convert_to={unit_convert_to} />
             <button className="p-2 bg-white rounded-md border border-2 active:text-blue-800" onClick={handleSubmit}>Submit</button>
           </form>
         </div >
