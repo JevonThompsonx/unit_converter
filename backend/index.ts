@@ -1,5 +1,6 @@
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
+import convert_units from 'convert-units'
 const app = new Hono().basePath("/api")
 
 // app.use('/static/*', serveStatic({ root: './' }))
@@ -14,8 +15,12 @@ app.post('/', async (c) => {
     unit_convert_from: unit_convert_from,
     unit_convert_to: unit_convert_to
   }
-  console.log(data)
-  return c.json({ ...data })
+  const convertedResult = convert_units(amount_to_convert).from(unit_convert_from).to(unit_convert_to)
+  const conversionObject = {
+    convertedResult: `${convertedResult}${unit_convert_to}`,
+    original: `${amount_to_convert}${unit_convert_from}`
+  }
+  return c.json({ data, conversionObject })
 })
 Bun.serve({
   port: port,
@@ -23,6 +28,5 @@ Bun.serve({
 })
 
 console.log(`Running on port ${port}`)
-
 
 
