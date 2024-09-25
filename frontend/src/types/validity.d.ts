@@ -1,8 +1,10 @@
-type validity = null | 'valid'
-interface ValidityObject {
-  amount: validity;
-  to: validity;
-  from: validity
+declare global {
+  type validity = null | 'valid';
+  interface ValidityObject {
+    amount: validity;
+    to: validity;
+    from: validity
+  }
 }
 
-export { validity, ValidityObject }
+export { }

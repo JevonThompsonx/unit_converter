@@ -1,2 +1,3 @@
 import { checkValidity, StarterValdity } from "./checkValidity";
-export { checkValidity, StarterValdity }
+import { handleSubmit } from "./handlers";
+export { checkValidity, StarterValdity, handleSubmit }

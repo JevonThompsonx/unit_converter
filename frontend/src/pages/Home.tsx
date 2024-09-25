@@ -1,9 +1,8 @@
 
 import { useRef, useState, useCallback } from "react";
-import Nav from "../components/Nav";
 import { units, inactive_unit_types, default_unit_types } from '../vars';
-import { ToSelect, FromSelect, UnitsComponent, AmountInput, ValidSpan, InValidSpan } from "../components";
-import { checkValidity, StarterValdity } from "../utils";
+import { ToSelect, FromSelect, UnitsComponent, AmountInput, ValidSpan, InValidSpan, SubmitButton, Nav } from "../components";
+import { checkValidity, StarterValdity, handleSubmit } from "../utils";
 
 export default function Home() {
   // define refs for usage 
@@ -48,35 +47,6 @@ export default function Home() {
   }, [inactive_unit_types]);
 
   // form submit
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('got the submit..');
-    if (amount_to_convert.current?.value && unit_convert_from.current?.value && unit_convert_to.current?.value) {
-      try {
-        const data = {
-          amount_to_convert: parseInt(amount_to_convert.current?.value),
-          unit_convert_from: unit_convert_from.current?.value,
-          unit_convert_to: unit_convert_to.current?.value,
-        };
-        console.log('trying...');
-        // fetch result
-        const response = await fetch('http://localhost:8080/api', {
-          method: 'POST',
-          headers: {
-            'Content-Type': "application/json",
-          },
-          body: JSON.stringify({ ...data }),
-        });
-        console.log('response from backend printing on frontend');
-        console.log(await response.json());
-      } catch (error) {
-        console.log('Well one of these values must be wrong');
-        console.log(error);
-      }
-    } else {
-      console.log('Error with given data');
-    }
-  };
 
   return (
     <>
@@ -125,7 +95,12 @@ export default function Home() {
               handleToValue={handleToValue}
               unit_convert_to={unit_convert_to}
             />
-            <button className="p-2 bg-white rounded-md border border-2 active:text-blue-800" onClick={handleSubmit}>Submit</button>
+            <SubmitButton
+              handleSubmit={handleSubmit}
+              amount_to_convert={amount_to_convert}
+              unit_convert_from={unit_convert_from}
+              unit_convert_to={unit_convert_to}
+            />
           </form>
         </div>
       </div>
