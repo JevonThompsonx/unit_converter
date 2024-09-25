@@ -1,8 +1,8 @@
-import {useState} from "react" 
-import {ValidSpan, InValidSpan} from "../components/ValiditySpans"
+
+import {ValidSpan, InValidSpan} from "./ValiditySpans"
 
 export default ()=> {
-  const [toValue, setToValue] = useState('')
+  
   <>
     <label htmlFor="unit_convert_from">
               Unit to convert from
