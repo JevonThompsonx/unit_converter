@@ -4,7 +4,7 @@
   },
   "scripts": {
     "install:all": "bun install",
-    "dev": "concurrently \"bun run --cwd frontend dev\" \"bun run --cwd backend dev\""
+    "dev": "concurrently \"bun run --cwd frontend dev\" \"bun --watch run ./backend/index.ts\""
   },
   "workspaces": [
     "frontend",

@@ -15,11 +15,14 @@ app.post('/', async (c) => {
     unit_convert_from: unit_convert_from,
     unit_convert_to: unit_convert_to
   }
+  console.log(data)
+  console.log("Converting...")
   const convertedResult = convert_units(amount_to_convert).from(unit_convert_from).to(unit_convert_to)
   const conversionObject = {
     convertedResult: `${convertedResult}${unit_convert_to}`,
     original: `${amount_to_convert}${unit_convert_from}`
   }
+  console.log(conversionObject)
   return c.json({ data, conversionObject })
 })
 Bun.serve({

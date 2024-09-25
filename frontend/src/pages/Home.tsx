@@ -70,6 +70,7 @@ export default function Home() {
   // to & from value state
   const [toValue, setToValue] = useState('')
   const [fromValue, setFromValue] = useState('')
+  const [amountValue, setAmountValue] = useState('');
   const handleToValue = (e: React.ChangeEvent<HTMLSelectElement>) => {
     checkValidity()
     setToValue(e.target.value)
@@ -78,6 +79,7 @@ export default function Home() {
     checkValidity()
     setFromValue(e.target.value)
   }
+
   //conversion type handling 
   interface Unit_Types {
     'length': { active: boolean },
@@ -113,6 +115,24 @@ export default function Home() {
       //to do : figure out how to use state to change which unit is colored on click
     }
   }
+  //form state type 
+  //form state 
+
+  //form result typing 
+  interface ConversionObject {
+    convertedResult: string;
+    original: string;
+  }
+  interface ConversionData {
+    amount_to_convert: number;
+    unit_convert_to: string;
+    unit_convert_from: string;
+  }
+  interface ResultData {
+    data: ConversionData,
+    conversionObject: ConversionObject
+  }
+
   // form submit
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
@@ -125,7 +145,7 @@ export default function Home() {
           unit_convert_to: unit_convert_to.current?.value
         }
         console.log('trying...')
-
+        //fetch result
         const response = await fetch('http://localhost:8080/api', {
           method: 'POST',
           headers: {
@@ -178,9 +198,13 @@ export default function Home() {
       )
     }
   }
+
+
+  const [] = useState()
   return (
     <>
       <Nav />
+
       <div className="flex flex-col justify-evenly items-center w-screen h-screen p-2">
         <div id="converter_base" className="flex flex-col justify-evenly items-center border border-black border-2 p-6 space-y-6">
           <h1 className="text-3xl">Unit Converter</h1>
@@ -196,7 +220,7 @@ export default function Home() {
               Amount to convert
             </label>
             <div className="flex flex-row justify-evenly space-x-2 items-center">
-              <input type="number" id="amount_to_convert" name="amount_to_convert" className="p-2 invalid:text-red-500 focus:border-blue-500 valid:text-green-600" min={1} placeholder="Amount to convert" required onChange={checkValidity} onBlur={checkValidity} ref={amount_to_convert}>
+              <input type="number" id="amount_to_convert" name="amount_to_convert" className="p-2 invalid:text-red-500 focus:border-blue-500 valid:text-green-600" min={1} placeholder="Amount to convert" required onChange={checkValidity} onBlur={checkValidity} ref={amount_to_convert} >
 
               </input>
               {
