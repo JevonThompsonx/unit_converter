@@ -1,4 +1,4 @@
-export default () => {
+export default ({units,unitTypes}) => {
     return(
         <>
     if (unitTypes.length.active) {
