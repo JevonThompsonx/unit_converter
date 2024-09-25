@@ -7,6 +7,7 @@ import units from '../vars/units'
 import AmountInput from "../components/AmountInput"
 import UnitsComponent from "../components/UnitsComponent"
 import FromSelext from "../components/FromSelect"
+import ToSelext from "../components/ToSelect"
 /* 
 ## Todo: 
 [] Make the unit conversion types ['length', 'weight', 'temperature'] clickable so that the application state changes to display different units to convert from & to according to that state, start w/ default state of length
@@ -195,20 +196,7 @@ handleFromValue={handleFromValue}
 unit_convert_from={unit_convert_from}
  /> 
 
-            <label htmlFor="unit_convert_to">
-              Unit to convert to
-            </label>
-
-            <div className="flex flex-row justify-evenly space-x-2 items-center">
-              <select className="p-2 invalid:text-red-500 focus:border-blue-500 valid:text-green-600" id="unit_convert_to" name="unit_convert_to" required value={toValue} onBlur={checkValidity} onChange={handleToValue} ref={unit_convert_to}>
-                <UnitsComponent units={{...units}} unitTypes={{unitTypes}} />
-              </select>
-              {
-                validity.to ?
-                  <ValidSpan /> :
-                  <InValidSpan />
-              }
-            </div>
+           <ToSelect />
             <button className="p-2 bg-white rounded-md border border-2 active:text-blue-800" onClick={handleSubmit}>Submit</button>
           </form>
         </div >
