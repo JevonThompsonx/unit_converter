@@ -1,4 +1,4 @@
-export default ({ValidSpan, InValidSpan, UnitsComponent})=> {
+export default ({ValidSpan, InValidSpan, UnitsComponent, fromValue,handleFromValue, checkValidity, unit_convert_from })=> {
   
   <>
     <label htmlFor="unit_convert_from">
