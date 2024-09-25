@@ -1,210 +1,135 @@
-import { FormEvent, useRef } from "react";
+
+import { useRef, useState, useCallback } from "react";
 import Nav from "../components/Nav";
-import { useState } from "react";
-import units from '../vars/units'
-import { ToSelect, FromSelect, UnitsComponent, AmountInput, ValidSpan, InValidSpan } from "../components"
-/* 
-## Todo: 
-[] Make the unit conversion types ['length', 'weight', 'temperature'] clickable so that the application state changes to display different units to convert from & to according to that state, start w/ default state of length
-[] Add active selected conversion type signifier like a text & border color change
-[x] Add key prop to unit conversion types 
-[x] Add converter module to actually be able to convert given values
-[] Make conversions work
-[] Review & Error handling  
-[] Ask chatgpt if there if there are any issues w/ the code
-[] Final review 
-[] Make it pretty 
-
-## Planned units
-
-Length: millimeter, centimeter, meter, kilometer, inch, foot, yard, mile.
-Weight: milligram, gram, kilogram, ounce, pound.
-Temperature: Celsius, Fahrenheit, Kelvin.
-
-## Available units 
-
-Temperature : C,F,K,R
-
-Length: mm,cm,m,in,ft-us,ft,mi
-
-Mass/weigt : mcg, mg,g,kg,oz,lb,mt,t
-
-*/
+import { units, inactive_unit_types, default_unit_types } from '../vars';
+import { ToSelect, FromSelect, UnitsComponent, AmountInput, ValidSpan, InValidSpan } from "../components";
+import { checkValidity, StarterValdity } from "../utils";
 
 export default function Home() {
-  //define vars for usage 
-  const amount_to_convert = useRef<HTMLInputElement>(null)
-  const unit_convert_from = useRef<HTMLSelectElement>(null)
-  const unit_convert_to = useRef<HTMLSelectElement>(null)
-  //vadility type handling
-  type validity = null | 'valid'
-  interface ValidityObject {
-    amount: validity;
-    to: validity;
-    from: validity
-  }
+  // define refs for usage 
+  const amount_to_convert = useRef<HTMLInputElement>(null);
+  const unit_convert_from = useRef<HTMLSelectElement>(null);
+  const unit_convert_to = useRef<HTMLSelectElement>(null);
+
   // starter validity object
-  const StarterValdity: ValidityObject = { amount: null, from: null, to: null }
-  const [validity, setValidity] = useState<ValidityObject>({ ...StarterValdity })
+  const [validity, setValidity] = useState<ValidityObject>({ ...StarterValdity });
 
-  //validity checker
-  const checkValidity = () => {
-    const tempValidity: ValidityObject = { ...StarterValdity }
-    if (amount_to_convert.current?.value) {
-      tempValidity.amount = 'valid'
-    } else {
-      tempValidity.amount = null
-    }
-    if (unit_convert_from.current?.value) {
-      tempValidity.from = 'valid'
-    } else {
-      tempValidity.from = null
-    }
-    if (unit_convert_to.current?.value) {
-      tempValidity.to = 'valid'
-    } else {
-      tempValidity.to = null
-    }
-    setValidity({ ...tempValidity })
-  }
   // to & from value state
-  const [toValue, setToValue] = useState('')
-  const [fromValue, setFromValue] = useState('')
+  const [toValue, setToValue] = useState('');
+  const [fromValue, setFromValue] = useState('');
   const [amountValue, setAmountValue] = useState('');
+
   const handleToValue = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    checkValidity()
-    setToValue(e.target.value)
-  }
+    checkValidity({ amount_to_convert, unit_convert_from, unit_convert_to, setValidity });
+    setToValue(e.target.value);
+  };
+
   const handleFromValue = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    checkValidity()
-    setFromValue(e.target.value)
-  }
+    checkValidity({ amount_to_convert, unit_convert_from, unit_convert_to, setValidity });
+    setFromValue(e.target.value);
+  };
 
-  //conversion type handling 
-  interface Unit_Types {
-    'length': { active: boolean },
-    'weight': { active: boolean },
-    'temperature': { active: boolean }
-  }
-  // unit state 
-  const default_unit_types = {
-    'length': { active: true },
-    'weight': { active: false },
-    'temperature': { active: false }
-  }
-  const inactive_unit_types = {
-    'length': { active: false },
-    'weight': { active: false },
-    'temperature': { active: false }
-  }
-  const [unitTypes, setUnitTypes] = useState<Unit_Types>({ ...default_unit_types })
+  const [unitTypes, setUnitTypes] = useState<Unit_Types>({ ...default_unit_types });
 
-  // unit converter state 
-  const handleUnitType = (e: React.KeyboardEvent<HTMLButtonElement> | React.MouseEvent<HTMLButtonElement>) => {
-    //console.log(e.target)
+  // Memoize handleUnitType
+  const handleUnitType = useCallback((e: React.KeyboardEvent<HTMLButtonElement> | React.MouseEvent<HTMLButtonElement>) => {
     switch ((e.target as HTMLButtonElement).id) {
       case 'weight':
-        setUnitTypes({ ...inactive_unit_types, 'weight': { active: true } })
+        setUnitTypes({ ...inactive_unit_types, 'weight': { active: true } });
         break;
       case 'length':
-        setUnitTypes({ ...inactive_unit_types, 'length': { active: true } })
+        setUnitTypes({ ...inactive_unit_types, 'length': { active: true } });
         break;
       case 'temperature':
-        setUnitTypes({ ...inactive_unit_types, 'temperature': { active: true } })
+        setUnitTypes({ ...inactive_unit_types, 'temperature': { active: true } });
         break;
-      //to do : figure out how to use state to change which unit is colored on click
+      // Ensure no state loop occurs
     }
-  }
-  //form state type 
-  //form state 
-
-  //form result typing 
-  interface ConversionObject {
-    convertedResult: string;
-    original: string;
-  }
-  interface ConversionData {
-    amount_to_convert: number;
-    unit_convert_to: string;
-    unit_convert_from: string;
-  }
-  interface ResultData {
-    data: ConversionData,
-    conversionObject: ConversionObject
-  }
+  }, [inactive_unit_types]);
 
   // form submit
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault()
-    console.log('got the submit..')
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('got the submit..');
     if (amount_to_convert.current?.value && unit_convert_from.current?.value && unit_convert_to.current?.value) {
       try {
         const data = {
           amount_to_convert: parseInt(amount_to_convert.current?.value),
           unit_convert_from: unit_convert_from.current?.value,
-          unit_convert_to: unit_convert_to.current?.value
-        }
-        console.log('trying...')
-        //fetch result
+          unit_convert_to: unit_convert_to.current?.value,
+        };
+        console.log('trying...');
+        // fetch result
         const response = await fetch('http://localhost:8080/api', {
           method: 'POST',
           headers: {
-            'Content-Type': "application/json"
+            'Content-Type': "application/json",
           },
-          body: JSON.stringify({ ...data })
-        })
-        console.log('reponse from backend printing on frontend')
-        console.log(await response.json())
+          body: JSON.stringify({ ...data }),
+        });
+        console.log('response from backend printing on frontend');
+        console.log(await response.json());
+      } catch (error) {
+        console.log('Well one of these values must be wrong');
+        console.log(error);
       }
-
-      catch (error) {
-        console.log('Well one of these values must be wrong')
-        console.log(error)
-      }
+    } else {
+      console.log('Error with given data');
     }
-    else {
-      console.log('Error w/ given data')
-    }
-  }
+  };
 
   return (
     <>
       <Nav />
-
       <div className="flex flex-col justify-evenly items-center w-screen h-screen p-2">
         <div id="converter_base" className="flex flex-col justify-evenly items-center border border-black border-2 p-6 space-y-6">
           <h1 className="text-3xl">Unit Converter</h1>
-          <div id="convert_type " className="flex flex-row justify-evenly items-center space-x-2">
-            {Object.entries(unitTypes).map((item) => {
-              return <button key={item[0]} id={item[0]} className={`p-2 ${item[1].active ? 'border-blue-500' : 'border-black'} border-2 rounded`}
+          <div id="convert_type" className="flex flex-row justify-evenly items-center space-x-2">
+            {Object.entries(unitTypes).map((item) => (
+              <button
+                key={item[0]}
+                id={item[0]}
+                className={`p-2 ${item[1].active ? 'border-blue-500' : 'border-black'} border-2 rounded`}
                 onClick={handleUnitType}
-              >{item[0]}</button>
-            })}
+              >
+                {item[0]}
+              </button>
+            ))}
           </div>
           <form action="/convert" className="flex flex-col space-y-2 p-2">
-
-            <AmountInput amount_to_convert={amount_to_convert}
-              checkValidity={checkValidity} ValidSpan={ValidSpan}
-              InValidSpan={InValidSpan} validity={{ ...validity }} />
-
+            <AmountInput
+              amount_to_convert={amount_to_convert}
+              checkValidity={() => checkValidity({ amount_to_convert, unit_convert_from, unit_convert_to, setValidity })} ValidSpan={ValidSpan}
+              InValidSpan={InValidSpan}
+              validity={{ ...validity }}
+            />
             <FromSelect
-              checkValidity={checkValidity}
-              ValidSpan={ValidSpan} InValidSpan={InValidSpan} validity={{ ...validity }}
+              checkValidity={() => checkValidity({ amount_to_convert, unit_convert_from, unit_convert_to, setValidity })} ValidSpan={ValidSpan}
+              InValidSpan={InValidSpan}
+              validity={{ ...validity }}
               UnitsComponent={UnitsComponent}
-              units={units} unitTypes={unitTypes}
-              fromValue={fromValue} handleFromValue={handleFromValue}
+              units={units}
+              unitTypes={unitTypes}
+              fromValue={fromValue}
+              handleFromValue={handleFromValue}
               unit_convert_from={unit_convert_from}
             />
-
-            <ToSelect checkValidity={checkValidity}
-              ValidSpan={ValidSpan} InValidSpan={InValidSpan} validity={{ ...validity }}
+            <ToSelect
+              checkValidity={() => checkValidity({ amount_to_convert, unit_convert_from, unit_convert_to, setValidity })} ValidSpan={ValidSpan}
+              InValidSpan={InValidSpan}
+              validity={{ ...validity }}
               UnitsComponent={UnitsComponent}
-              units={units} unitTypes={unitTypes}
-              toValue={toValue} handleToValue={handleToValue}
-              unit_convert_to={unit_convert_to} />
+              units={units}
+              unitTypes={unitTypes}
+              toValue={toValue}
+              handleToValue={handleToValue}
+              unit_convert_to={unit_convert_to}
+            />
             <button className="p-2 bg-white rounded-md border border-2 active:text-blue-800" onClick={handleSubmit}>Submit</button>
           </form>
-        </div >
-      </div >
-    </>)
+        </div>
+      </div>
+    </>
+  );
 }
+
