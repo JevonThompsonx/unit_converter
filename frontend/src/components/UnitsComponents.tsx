@@ -1,5 +1,6 @@
 export default () => {
     return(
+        <>
     if (unitTypes.length.active) {
       return (
         <>
@@ -29,5 +30,6 @@ export default () => {
           })}
         </>
       )
-    })
+    }
+        </>)
   }
