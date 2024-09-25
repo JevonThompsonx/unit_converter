@@ -1,5 +1,5 @@
 
-export default ({amount_to_convert,ValidSpan, InValidSpan,checkValidity})=> {
+export default ({amount_to_convert,ValidSpan, InValidSpan,checkValidity, validity})=> {
 return (<label htmlFor="amount_to_convert">
               Amount to convert
             </label>
