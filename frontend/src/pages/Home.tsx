@@ -186,7 +186,7 @@ export default function Home() {
           </div>
           <form action="/convert" className="flex flex-col space-y-2 p-2">
 
-            <AmountInput amount_to_convert={amount_to_convert} checkValidity={checkValidity} ValidInput={ValidInput} InValidInput={InValidInput} />
+            <AmountInput amount_to_convert={amount_to_convert} checkValidity={checkValidity} ValidInput={ValidInput} InValidInput={InValidInput} validity={{...validity}} />
 
             <label htmlFor="unit_convert_from">
               Unit to convert from
