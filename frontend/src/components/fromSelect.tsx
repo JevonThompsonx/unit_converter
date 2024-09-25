@@ -1,7 +1,4 @@
-
-import {ValidSpan, InValidSpan} from "./ValiditySpans"
-
-export default ()=> {
+export default ({ValidSpan, InValidSpan, UnitsComponent})=> {
   
   <>
     <label htmlFor="unit_convert_from">
