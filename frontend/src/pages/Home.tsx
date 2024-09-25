@@ -189,21 +189,13 @@ export default function Home() {
 
             <AmountInput amount_to_convert={amount_to_convert} checkValidity={checkValidity} ValidInput={ValidInput} InValidInput={InValidInput} validity={{...validity}} />
 
-            <label htmlFor="unit_convert_from">
-              Unit to convert from
-            </label>
+<FromSelect checkValidity={checkValidity} ValidInput={ValidInput} InValidInput={InValidInput} validity={{...validity}}
+fromValue={fromValue} 
+handleFromValue={handleFromValue}
+unit_convert_from={unit_convert_from}
+ /> 
 
-            <div className="flex flex-row justify-evenly space-x-2 items-center">
-              <select className="p-2 invalid:text-red-500 focus:border-blue-500 valid:text-green-600" id="unit_convert_from" name="unit_convert_from" required value={fromValue} onBlur={checkValidity} onChange={handleFromValue} ref={unit_convert_from}>
-                <UnitsComponent units={{...units}} unitTypes={{unitTypes}} />
-              </select>
-              {
-                validity.from ?
-                  <ValidSpan /> :
-                  <InValidSpan />
-              }
-            </div>
-            <label htmlFor="unit_convert_from">
+            <label htmlFor="unit_convert_to">
               Unit to convert to
             </label>
 
