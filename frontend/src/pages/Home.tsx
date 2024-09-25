@@ -3,6 +3,8 @@ import Nav from "../components/Nav";
 import { useState } from "react";
 import { ValidSpan, InValidSpan } from "../components/ValiditySpans";
 import units from '../vars/units'
+
+import UnitsComponent from "../components/UnitsComponent"
 /* 
 ## Todo: 
 [] Make the unit conversion types ['length', 'weight', 'temperature'] clickable so that the application state changes to display different units to convert from & to according to that state, start w/ default state of length
@@ -166,41 +168,7 @@ export default function Home() {
       console.log('Error w/ given data')
     }
   }
-  const UnitsComponent = () => {
-    if (unitTypes.length.active) {
-      return (
-        <>
-          <option value="" >--please choose an option--</option>
-          {Object.entries(units.length).map((item) => {
-            return <option value={item[1]} key={item[0]}>{item[0]}</option>
-          })}
-        </>
-      )
-    }
-    if (unitTypes.weight.active) {
-      return (
-        <>
-          <option value="" >--please choose an option--</option>
-          {Object.entries(units.weight).map((item) => {
-            return <option value={item[1]} key={item[0]}>{item[0]}</option>
-          })}
-        </>
-      )
-    }
-    if (unitTypes.temperature.active) {
-      return (
-        <>
-          <option value="" >--please choose an option--</option>
-          {Object.entries(units.temperature).map((item) => {
-            return <option value={item[1]} key={item[0]}>{item[0]}</option>
-          })}
-        </>
-      )
-    }
-  }
 
-
-  const [] = useState()
   return (
     <>
       <Nav />
@@ -236,7 +204,7 @@ export default function Home() {
 
             <div className="flex flex-row justify-evenly space-x-2 items-center">
               <select className="p-2 invalid:text-red-500 focus:border-blue-500 valid:text-green-600" id="unit_convert_from" name="unit_convert_from" required value={fromValue} onBlur={checkValidity} onChange={handleFromValue} ref={unit_convert_from}>
-                <UnitsComponent />
+                <UnitsComponent units={{...units}} unitTypes={{unitTypes}} />
               </select>
               {
                 validity.from ?
@@ -250,7 +218,7 @@ export default function Home() {
 
             <div className="flex flex-row justify-evenly space-x-2 items-center">
               <select className="p-2 invalid:text-red-500 focus:border-blue-500 valid:text-green-600" id="unit_convert_to" name="unit_convert_to" required value={toValue} onBlur={checkValidity} onChange={handleToValue} ref={unit_convert_to}>
-                <UnitsComponent />
+                <UnitsComponent units={{...units}} unitTypes={{unitTypes}} />
               </select>
               {
                 validity.to ?
