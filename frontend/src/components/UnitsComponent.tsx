@@ -1,13 +1,14 @@
-import { LenghtUnit, TemperatureUnits, WeightUnit } from "./childComponents"
-export default function UnitSelector({ units, unitTypes }) {
+import { LenghtUnits, TemperatureUnits, WeightUnits } from "./childComponents"
+function UnitSelector({ units, unitTypes }) {
   return (
     <>
-      {unitTypes.length.active && <LenghtUnit units={{ ...units }} />}
+      {unitTypes.length.active && <LenghtUnits units={{ ...units }} />}
 
-      {unitTypes.weight.active && <WeightUnit units={{ ...units }} />}
+      {unitTypes.weight.active && <WeightUnits units={{ ...units }} />}
 
       {unitTypes.temperature.active && <TemperatureUnits units={{ ...units }} />}
     </>
   );
 }
 
+export default UnitSelector

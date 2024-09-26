@@ -1,4 +1,4 @@
-export default ({ ValidSpan, InValidSpan, UnitsComponent, toValue, handleToValue, checkValidity, unit_convert_to, validity, units, unitTypes }) => {
+const ToSelect = ({ ValidSpan, InValidSpan, UnitsComponent, toValue, handleToValue, checkValidity, unit_convert_to, validity, units, unitTypes }) => {
   return (
     <>
       <label htmlFor="unit_convert_to">
@@ -21,3 +21,5 @@ export default ({ ValidSpan, InValidSpan, UnitsComponent, toValue, handleToValue
 
 
 }
+
+export default ToSelect

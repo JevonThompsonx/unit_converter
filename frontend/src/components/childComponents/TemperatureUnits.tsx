@@ -1,4 +1,4 @@
-export default ({ units }) => {
+const TemperatureUnits = ({ units }) => {
   return (
     <>
       <option value="">--please choose an option--</option>
@@ -10,3 +10,4 @@ export default ({ units }) => {
     </>
   )
 }
+export default TemperatureUnits

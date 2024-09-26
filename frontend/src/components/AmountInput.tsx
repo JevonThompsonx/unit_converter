@@ -1,5 +1,5 @@
 
-export default ({ amount_to_convert, ValidSpan, InValidSpan, checkValidity, validity }) => {
+const AmountInput = ({ amount_to_convert, ValidSpan, InValidSpan, checkValidity, validity }) => {
   return (
     <>
       <label htmlFor="amount_to_convert">
@@ -18,3 +18,5 @@ export default ({ amount_to_convert, ValidSpan, InValidSpan, checkValidity, vali
     </>
   )
 }
+
+export default AmountInput

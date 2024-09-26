@@ -1,4 +1,4 @@
-import WeightUnit from "./WeightUnit";
-import LenghtUnit from "./LenghtUnit";
+import WeightUnits from "./WeightUnits";
+import LenghtUnits from "./LenghtUnits";
 import TemperatureUnits from "./TemperatureUnits";
-export { WeightUnit, LenghtUnit, TemperatureUnits }
+export { WeightUnits, LenghtUnits, TemperatureUnits }
