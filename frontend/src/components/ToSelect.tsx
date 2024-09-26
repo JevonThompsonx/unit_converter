@@ -1,4 +1,9 @@
-const ToSelect = ({ ValidSpan, InValidSpan, UnitsComponent, toValue, handleToValue, checkValidity, unit_convert_to, validity, units, unitTypes }) => {
+import { useContext } from "react"
+import { Context } from "../pages/Home"
+const ToSelect = () => {
+  const { ValidSpan, InValidSpan, UnitsComponent, toValue, handleToValue, checkValidity, unit_convert_to, validity, units, unitTypes, amount_to_convert, setValidity, unit_convert_from } = useContext(Context)
+
+
   return (
     <>
       <label htmlFor="unit_convert_to">
@@ -6,20 +11,20 @@ const ToSelect = ({ ValidSpan, InValidSpan, UnitsComponent, toValue, handleToVal
       </label>
 
       <div className="flex flex-row justify-evenly space-x-2 items-center">
-        <select className="p-2 invalid:text-red-500 focus:border-blue-500 valid:text-green-600" id="unit_convert_to" name="unit_convert_to" required value={toValue} onBlur={checkValidity} onChange={handleToValue} ref={unit_convert_to}>
+        <select className="p-2 invalid:text-red-500 focus:border-blue-500 valid:text-green-600" id="unit_convert_to" name="unit_convert_to" required value={toValue} onBlur={
+          () => checkValidity({ amount_to_convert, unit_convert_to, unit_convert_from, setValidity })
+        } onChange={handleToValue} ref={unit_convert_to}>
           <UnitsComponent units={{ ...units }} unitTypes={{ ...unitTypes }} />
+
         </select>
         {
           validity.to ?
             <ValidSpan /> :
             <InValidSpan />
         }
-      </div>
-    </>
-
-  )
-
-
+      </div >
+    </>)
 }
 
 export default ToSelect
+

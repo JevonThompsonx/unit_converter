@@ -32,6 +32,7 @@ declare global {
     unit_convert_from: React.RefObject<HTMLSelectElement>;
     unit_convert_to: React.RefObject<HTMLSelectElement>;
   }
+  type SelectType = 'to' | 'from'
 }
 
 export { }
