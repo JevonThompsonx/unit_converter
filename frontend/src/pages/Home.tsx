@@ -3,6 +3,7 @@ import { useRef, useState, useCallback, createContext } from "react";
 import { units, inactive_unit_types, default_unit_types } from '../vars';
 import { ToSelect, FromSelect, UnitsComponent, AmountInput, ValidSpan, InValidSpan, SubmitButton, Nav } from "../components";
 import { checkValidity, StarterValdity, handleSubmit } from "../utils";
+import ConverterType from "../components/ConverterType";
 // to dos : 
 // [] set up a useEffect or useCallback as the validity checker 
 export const Context = createContext<any>(null)
@@ -47,24 +48,13 @@ export default function Home() {
   }, [inactive_unit_types]);
   // form submit
   return (
-    <Context.Provider value={{ ValidSpan, InValidSpan, UnitsComponent, fromValue, handleFromValue, checkValidity, unit_convert_from, unit_convert_to, validity, units, unitTypes, toValue, handleToValue, setValidity, handleSubmit, amount_to_convert }}>
+    <Context.Provider value={{ ValidSpan, InValidSpan, UnitsComponent, fromValue, handleFromValue, checkValidity, unit_convert_from, unit_convert_to, validity, units, unitTypes, toValue, handleToValue, setValidity, handleSubmit, amount_to_convert, handleUnitType }}>
       <Nav />
       <div className="flex flex-col justify-evenly items-center w-screen h-screen p-2">
         <div id="converter_base" className="flex flex-col justify-evenly items-center border border-black border-2 p-6 space-y-6">
           <h1 className="text-3xl">Unit Converter</h1>
-          <div id="convert_type" className="flex flex-row justify-evenly items-center space-x-2">
-            {Object.entries(unitTypes).map((item) => (
-              <button
-                key={item[0]}
-                id={item[0]}
-                className={`p-2 ${item[1].active ? 'border-blue-500' : 'border-black'} border-2 rounded`}
-                onClick={handleUnitType}
-              >
-                {item[0]}
-              </button>
-            ))}
-          </div>
           <form action="/convert" className="flex flex-col space-y-2 p-2">
+            <ConverterType />
             <AmountInput
             />
             <FromSelect />
