@@ -43,7 +43,9 @@ export default function Home() {
       case 'temperature':
         setUnitTypes({ ...inactive_unit_types, 'temperature': { active: true } });
         break;
+
     }
+    checkValidity({ amount_to_convert, unit_convert_from, unit_convert_to, setValidity, validity })
   }, [inactive_unit_types]);
   // form submit
   return (
