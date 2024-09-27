@@ -12,7 +12,7 @@ const FromSelect = () => {
 
       <div className="flex flex-row justify-evenly space-x-2 items-center">
         <select className="p-2 invalid:text-red-500 focus:border-blue-500 valid:text-green-600" id="unit_convert_from" name="unit_convert_from" required value={fromValue} onBlur={
-          () => checkValidity({ amount_to_convert, unit_convert_from, unit_convert_to, setValidity })
+          () => checkValidity({ amount_to_convert, unit_convert_from, unit_convert_to, setValidity, validity })
         } onChange={handleFromValue} ref={unit_convert_from}>
           <UnitsComponent units={{ ...units }} unitTypes={{ ...unitTypes }} />
 
