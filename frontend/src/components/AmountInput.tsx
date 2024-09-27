@@ -1,5 +1,7 @@
-
-const AmountInput = ({ unit_convert_to, unit_convert_from, setValidity, amount_to_convert, ValidSpan, InValidSpan, checkValidity, validity }) => {
+import { useContext } from "react"
+import { Context } from "../pages/Home"
+const AmountInput = () => {
+  const { unit_convert_to, unit_convert_from, setValidity, amount_to_convert, ValidSpan, InValidSpan, checkValidity, validity } = useContext(Context)
   return (
     <>
       <label htmlFor="amount_to_convert">

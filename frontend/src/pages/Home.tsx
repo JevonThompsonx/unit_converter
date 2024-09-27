@@ -66,14 +66,6 @@ export default function Home() {
           </div>
           <form action="/convert" className="flex flex-col space-y-2 p-2">
             <AmountInput
-              amount_to_convert={amount_to_convert}
-              checkValidity={() => checkValidity({ amount_to_convert, unit_convert_from, unit_convert_to, setValidity, validity })}
-              ValidSpan={ValidSpan}
-              InValidSpan={InValidSpan}
-              validity={{ ...validity }}
-              unit_convert_to={unit_convert_to}
-              unit_convert_from={unit_convert_from}
-              setValidity={setValidity}
             />
             <FromSelect />
             <ToSelect />
