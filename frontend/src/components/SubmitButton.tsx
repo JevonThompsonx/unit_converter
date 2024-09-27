@@ -1,12 +1,10 @@
 
-import React from 'react';
-
-const SubmitButton: React.FC<SubmitButtonProps> = ({
-  handleSubmit,
-  amount_to_convert,
-  unit_convert_to,
-  unit_convert_from,
-}) => {
+import { useContext } from 'react';
+import { Context } from '../pages/Home';
+const SubmitButton = () => {
+  const { handleSubmit,
+    amount_to_convert, unit_convert_from
+    , unit_convert_to } = useContext(Context)
   return (
     <>
       <button

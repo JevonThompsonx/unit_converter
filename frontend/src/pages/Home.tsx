@@ -47,7 +47,7 @@ export default function Home() {
   }, [inactive_unit_types]);
   // form submit
   return (
-    <Context.Provider value={{ ValidSpan, InValidSpan, UnitsComponent, fromValue, handleFromValue, checkValidity, unit_convert_from, unit_convert_to, validity, units, unitTypes, toValue, handleToValue, setValidity }}>
+    <Context.Provider value={{ ValidSpan, InValidSpan, UnitsComponent, fromValue, handleFromValue, checkValidity, unit_convert_from, unit_convert_to, validity, units, unitTypes, toValue, handleToValue, setValidity, handleSubmit, amount_to_convert }}>
       <Nav />
       <div className="flex flex-col justify-evenly items-center w-screen h-screen p-2">
         <div id="converter_base" className="flex flex-col justify-evenly items-center border border-black border-2 p-6 space-y-6">
@@ -77,12 +77,7 @@ export default function Home() {
             />
             <FromSelect />
             <ToSelect />
-            <SubmitButton
-              handleSubmit={handleSubmit}
-              amount_to_convert={amount_to_convert}
-              unit_convert_from={unit_convert_from}
-              unit_convert_to={unit_convert_to}
-            />
+            <SubmitButton />
           </form>
         </div>
       </div>

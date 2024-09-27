@@ -1,4 +1,4 @@
-const submitHandler = async ({ e, amount_to_convert, unit_convert_from, unit_convert_to }: SubmitHandlerProps) => {
+const handleSubmit = async ({ e, amount_to_convert, unit_convert_from, unit_convert_to }: SubmitHandlerProps) => {
   e.preventDefault();
   console.log('Got the submit...');
 
@@ -6,9 +6,9 @@ const submitHandler = async ({ e, amount_to_convert, unit_convert_from, unit_con
   if (amount_to_convert.current?.value && unit_convert_from.current?.value && unit_convert_to.current?.value) {
     try {
       const data = {
-        amount_to_convert: parseInt(amount_to_convert.current.value), // Use current.value directly
-        unit_convert_from: unit_convert_from.current.value,
-        unit_convert_to: unit_convert_to.current.value,
+        amount_to_convert: parseInt(amount_to_convert?.current?.value), // Use current.value directly
+        unit_convert_from: unit_convert_from?.current?.value,
+        unit_convert_to: unit_convert_to?.current?.value,
       };
 
       console.log('Trying to send data...');
@@ -33,5 +33,5 @@ const submitHandler = async ({ e, amount_to_convert, unit_convert_from, unit_con
   }
 };
 
-export default submitHandler;
+export default handleSubmit;
 
