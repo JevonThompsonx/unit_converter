@@ -3,7 +3,8 @@ import { useRef, useState, useCallback, createContext } from "react";
 import { units, inactive_unit_types, default_unit_types } from '../vars';
 import { ToSelect, FromSelect, UnitsComponent, AmountInput, ValidSpan, InValidSpan, SubmitButton, Nav } from "../components";
 import { checkValidity, StarterValdity, handleSubmit } from "../utils";
-
+// to dos : 
+// [] set up a useEffect or useCallback as the validity checker 
 export const Context = createContext<any>(null)
 export default function Home() {
   // define refs for usage 
