@@ -1,7 +1,7 @@
 
 import { useRef, useState, useCallback, createContext } from "react";
 import { units, inactive_unit_types, default_unit_types } from '../vars';
-import { UnitsComponent, ValidSpan, InValidSpan, Nav, Converter } from "../components";
+import { UnitsComponent, ValidSpan, InValidSpan, Nav, Converter, Result } from "../components";
 import { checkValidity, StarterValdity, handleSubmit } from "../utils";
 // to dos : 
 // [] set up a useEffect or useCallback as the validity checker 
@@ -19,7 +19,7 @@ export default function Home() {
   const [toValue, setToValue] = useState('');
   const [fromValue, setFromValue] = useState('');
   const [amountValue, setAmountValue] = useState('');
-
+  const [conversionAmount, setConversionAmount] = useState<SubmitResults>()
   const handleToValue = (e: React.ChangeEvent<HTMLSelectElement>) => {
     checkValidity({ amount_to_convert, unit_convert_from, unit_convert_to, setValidity, validity });
     setToValue(e.target.value);
@@ -49,9 +49,11 @@ export default function Home() {
   }, [inactive_unit_types]);
   // form submit
   return (
-    <Context.Provider value={{ ValidSpan, InValidSpan, UnitsComponent, fromValue, handleFromValue, checkValidity, unit_convert_from, unit_convert_to, validity, units, unitTypes, toValue, handleToValue, setValidity, handleSubmit, amount_to_convert, handleUnitType }}>
+    <Context.Provider value={{ ValidSpan, InValidSpan, UnitsComponent, fromValue, handleFromValue, checkValidity, unit_convert_from, unit_convert_to, validity, units, unitTypes, toValue, handleToValue, setValidity, handleSubmit, amount_to_convert, handleUnitType, setConversionAmount, conversionAmount }}>
       <Nav />
-      <Converter />
+      {conversionAmount ?
+        <Result /> :
+        <Converter />}
     </Context.Provider>
   );
 }

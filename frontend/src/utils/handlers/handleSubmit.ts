@@ -23,8 +23,7 @@ const handleSubmit = async ({ e, amount_to_convert, unit_convert_from, unit_conv
       });
 
       console.log('Response from backend:');
-      const jsonResponse = await response.json();
-      console.log(jsonResponse);
+      return await response.json();
     } catch (error) {
       console.error('Error during fetch operation:', error);
     }

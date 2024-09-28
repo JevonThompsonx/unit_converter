@@ -7,5 +7,6 @@ import SubmitButton from "./SubmitButton"
 import Nav from "./Nav"
 import ConverterType from "./ConverterType"
 import Converter from "./Converter"
-export { AmountInput, FromSelect, ToSelect, UnitsComponent, ValidSpan, InValidSpan, SubmitButton, Nav, ConverterType, Converter }
+import Result from "./Result"
+export { AmountInput, FromSelect, ToSelect, UnitsComponent, ValidSpan, InValidSpan, SubmitButton, Nav, ConverterType, Converter, Result }
 

@@ -33,6 +33,16 @@ declare global {
     unit_convert_to: React.RefObject<HTMLSelectElement>;
   }
   type SelectType = 'to' | 'from'
+  interface SubmitResults {
+    data: {
+      amount_to_convert: Number;
+      unit_convert_from: string;
+      unit_convert_to: string;
+    },
+    conversionObject: {
+      convertedResult: string,
+      original: string
+    }
+  }
 }
-
 export { }
