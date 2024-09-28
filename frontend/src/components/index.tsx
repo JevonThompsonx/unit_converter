@@ -8,5 +8,6 @@ import Nav from "./Nav"
 import ConverterType from "./ConverterType"
 import Converter from "./Converter"
 import Result from "./Result"
-export { AmountInput, FromSelect, ToSelect, UnitsComponent, ValidSpan, InValidSpan, SubmitButton, Nav, ConverterType, Converter, Result }
+import ResetButton from "./ResetButton"
+export { AmountInput, FromSelect, ToSelect, UnitsComponent, ValidSpan, InValidSpan, SubmitButton, Nav, ConverterType, Converter, Result, ResetButton }
 

@@ -19,7 +19,7 @@ export default function Home() {
   const [toValue, setToValue] = useState('');
   const [fromValue, setFromValue] = useState('');
   const [amountValue, setAmountValue] = useState('');
-  const [conversionAmount, setConversionAmount] = useState<SubmitResults>()
+  const [conversionAmount, setConversionAmount] = useState<ConversionResult>()
   const handleToValue = (e: React.ChangeEvent<HTMLSelectElement>) => {
     checkValidity({ amount_to_convert, unit_convert_from, unit_convert_to, setValidity, validity });
     setToValue(e.target.value);
@@ -51,9 +51,12 @@ export default function Home() {
   return (
     <Context.Provider value={{ ValidSpan, InValidSpan, UnitsComponent, fromValue, handleFromValue, checkValidity, unit_convert_from, unit_convert_to, validity, units, unitTypes, toValue, handleToValue, setValidity, handleSubmit, amount_to_convert, handleUnitType, setConversionAmount, conversionAmount }}>
       <Nav />
-      {conversionAmount ?
-        <Result /> :
-        <Converter />}
+
+      <div className="flex flex-col justify-evenly items-center w-screen h-screen p-2">
+        {conversionAmount ?
+          <Result /> :
+          <Converter />}
+      </div>
     </Context.Provider>
   );
 }

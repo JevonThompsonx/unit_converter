@@ -6,18 +6,16 @@ import ConverterType from "./ConverterType"
 export default function Converter() {
 
   return (
-    <div className="flex flex-col justify-evenly items-center w-screen h-screen p-2">
-      <div id="converter_base" className="flex flex-col justify-evenly items-center border border-black border-2 p-6 space-y-6">
-        <h1 className="text-3xl">Unit Converter</h1>
-        <form action="/convert" className="flex flex-col space-y-2 p-2">
-          <ConverterType />
-          <AmountInput
-          />
-          <FromSelect />
-          <ToSelect />
-          <SubmitButton />
-        </form>
-      </div>
+    <div id="converter_base" className="flex flex-col justify-evenly items-center border border-black border-2 p-6 space-y-6">
+      <h1 className="text-3xl">Unit Converter</h1>
+      <form action="/convert" className="flex flex-col space-y-2 p-2">
+        <ConverterType />
+        <AmountInput
+        />
+        <FromSelect />
+        <ToSelect />
+        <SubmitButton />
+      </form>
     </div>
   )
 }
