@@ -16,7 +16,9 @@ const SubmitButton = () => {
             unit_convert_to,
             unit_convert_from,
           });
-          setConversionAmount({ ...submitResults })
+          if (submitResults) {
+            setConversionAmount({ ...submitResults })
+          }
         }}
       >
         Submit

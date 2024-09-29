@@ -18,7 +18,6 @@ export default function Home() {
   // to & from value state
   const [toValue, setToValue] = useState('');
   const [fromValue, setFromValue] = useState('');
-  const [amountValue, setAmountValue] = useState('');
   const [conversionAmount, setConversionAmount] = useState<ConversionResult>()
   const handleToValue = (e: React.ChangeEvent<HTMLSelectElement>) => {
     checkValidity({ amount_to_convert, unit_convert_from, unit_convert_to, setValidity, validity });
@@ -43,13 +42,14 @@ export default function Home() {
       case 'temperature':
         setUnitTypes({ ...inactive_unit_types, 'temperature': { active: true } });
         break;
-
     }
-    checkValidity({ amount_to_convert, unit_convert_from, unit_convert_to, setValidity, validity })
+    setToValue('')
+    setFromValue('')
+
   }, [inactive_unit_types]);
   // form submit
   return (
-    <Context.Provider value={{ ValidSpan, InValidSpan, UnitsComponent, fromValue, handleFromValue, checkValidity, unit_convert_from, unit_convert_to, validity, units, unitTypes, toValue, handleToValue, setValidity, handleSubmit, amount_to_convert, handleUnitType, setConversionAmount, conversionAmount }}>
+    <Context.Provider value={{ ValidSpan, InValidSpan, UnitsComponent, fromValue, handleFromValue, checkValidity, unit_convert_from, unit_convert_to, validity, units, unitTypes, toValue, handleToValue, setValidity, handleSubmit, amount_to_convert, handleUnitType, setConversionAmount, conversionAmount, setToValue, setFromValue }}>
       <Nav />
 
       <div className="flex flex-col justify-evenly items-center w-screen h-screen p-2">

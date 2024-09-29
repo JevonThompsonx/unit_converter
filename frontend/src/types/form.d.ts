@@ -1,5 +1,3 @@
-import { SubmitButton } from "../components";
-
 //form result typing
 declare global {
   interface ConversionObject {
