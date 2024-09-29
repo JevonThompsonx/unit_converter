@@ -1,10 +1,10 @@
 
-import { useRef, useState, useCallback, createContext } from "react";
+import { useRef, useState, useCallback, createContext, useEffect } from "react";
 import { units, inactive_unit_types, default_unit_types } from '../vars';
 import { UnitsComponent, ValidSpan, InValidSpan, Nav, Converter, Result } from "../components";
 import { checkValidity, StarterValdity, handleSubmit } from "../utils";
 // to dos : 
-// [] set up a useEffect or useCallback as the validity checker 
+// [setup validity checker to trigger when toValue & FromValue are changed to prevent having to pass it to literally everything]
 export const Context = createContext<any>(null)
 export default function Home() {
   // define refs for usage 
@@ -20,11 +20,9 @@ export default function Home() {
   const [fromValue, setFromValue] = useState('');
   const [conversionAmount, setConversionAmount] = useState<ConversionResult>()
   const handleToValue = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    checkValidity({ amount_to_convert, unit_convert_from, unit_convert_to, setValidity, validity });
     setToValue(e.target.value);
   };
   const handleFromValue = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    checkValidity({ amount_to_convert, unit_convert_from, unit_convert_to, setValidity, validity });
     setFromValue(e.target.value);
   };
 
@@ -47,9 +45,12 @@ export default function Home() {
     setFromValue('')
 
   }, [inactive_unit_types]);
+  useEffect(() => {
+    checkValidity({ amount_to_convert, unit_convert_from, unit_convert_to, setValidity, validity });
+  }, [toValue, fromValue])
   // form submit
   return (
-    <Context.Provider value={{ ValidSpan, InValidSpan, UnitsComponent, fromValue, handleFromValue, checkValidity, unit_convert_from, unit_convert_to, validity, units, unitTypes, toValue, handleToValue, setValidity, handleSubmit, amount_to_convert, handleUnitType, setConversionAmount, conversionAmount, setToValue, setFromValue }}>
+    <Context.Provider value={{ ValidSpan, InValidSpan, UnitsComponent, fromValue, handleFromValue, unit_convert_from, unit_convert_to, validity, units, unitTypes, toValue, handleToValue, setValidity, handleSubmit, amount_to_convert, handleUnitType, setConversionAmount, conversionAmount, setToValue, setFromValue }}>
       <Nav />
 
       <div className="flex flex-col justify-evenly items-center w-screen h-screen p-2">
