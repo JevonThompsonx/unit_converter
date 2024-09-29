@@ -19,12 +19,7 @@ export default function Home() {
   const [toValue, setToValue] = useState('');
   const [fromValue, setFromValue] = useState('');
   const [conversionAmount, setConversionAmount] = useState<ConversionResult>()
-  const handleToValue = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setToValue(e.target.value);
-  };
-  const handleFromValue = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setFromValue(e.target.value);
-  };
+  
 
   const [unitTypes, setUnitTypes] = useState<Unit_Types>({ ...default_unit_types });
 
@@ -50,7 +45,7 @@ export default function Home() {
   }, [toValue, fromValue])
   // form submit
   return (
-    <Context.Provider value={{ ValidSpan, InValidSpan, UnitsComponent, fromValue, handleFromValue, unit_convert_from, unit_convert_to, validity, units, unitTypes, toValue, handleToValue, setValidity, handleSubmit, amount_to_convert, handleUnitType, setConversionAmount, conversionAmount, setToValue, setFromValue }}>
+    <Context.Provider value={{ ValidSpan, InValidSpan, UnitsComponent, fromValue, unit_convert_from, unit_convert_to, validity, units, unitTypes, toValue, setValidity, handleSubmit, amount_to_convert, handleUnitType, setConversionAmount, conversionAmount, setToValue, setFromValue }}>
       <Nav />
 
       <div className="flex flex-col justify-evenly items-center w-screen h-screen p-2">
