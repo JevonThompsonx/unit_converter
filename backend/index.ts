@@ -25,6 +25,7 @@ app.post('/', async (c) => {
   //console.log(conversionObject)
   return c.json({ data, conversionObject })
 })
+app.get('/test', (c) => c.html('<h1>Testing... <h1>'))
 Bun.serve({
   port: port,
   fetch: app.fetch
