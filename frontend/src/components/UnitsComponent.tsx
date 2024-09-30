@@ -1,5 +1,5 @@
 import { LenghtUnits, TemperatureUnits, WeightUnits } from "./childComponents"
-function UnitSelector({ units, unitTypes }) {
+function UnitSelector({ units, unitTypes }: { unitTypes: Unit_Types, units: Units }) {
   return (
     <>
       {unitTypes.length.active && <LenghtUnits units={{ ...units }} />}

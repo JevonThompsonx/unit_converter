@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { Context } from "../pages/Home"
 export default function ConverterType() {
-  const { handleUnitType, unitTypes } = useContext(Context)
+  const { handleUnitType, unitTypes }: { handleUnitType: any, unitTypes: Unit_Types } = useContext(Context)
   return (
     <div id="convert_type" className="flex flex-row justify-evenly items-center space-x-2">
       {Object.entries(unitTypes).map((item) => (

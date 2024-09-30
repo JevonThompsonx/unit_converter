@@ -1,4 +1,4 @@
-const LengthUnits = ({ units }) => {
+const LengthUnits = ({ units }: { units: Units }) => {
   return (
     <>
       <option value="">--please choose an option--</option>

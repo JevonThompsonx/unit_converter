@@ -1,4 +1,4 @@
-const WeightUnits = ({ units }) => {
+const WeightUnits = ({ units }: { units: Units }) => {
   return (
     <>
       <option value="">--please choose an option--</option>
