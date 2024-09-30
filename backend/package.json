@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "bun --watch run index.ts",
-    "build": "bun build ./index.tsx --outdir ./out",
+    "build": "bun build ./index.ts --outdir ./out",
     "serve": "bun ./out/index.js"
   },
   "devDependencies": {
