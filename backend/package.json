@@ -1,11 +1,11 @@
 {
-  "name": "backend",
-  "module": "index.ts",
+  "name": "converter-backend",
+  "module": "out/index.js",
   "type": "module",
   "scripts": {
     "dev": "bun --watch run index.ts",
     "build": "bun build ./index.ts --outdir ./out",
-    "serve": "bun ./out/index.js"
+    "start": "node ./out/index.js"
   },
   "devDependencies": {
     "@types/bun": "^1.1.9",
