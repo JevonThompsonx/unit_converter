@@ -14,7 +14,7 @@ const handleSubmit = async ({ e, amount_to_convert, unit_convert_from, unit_conv
       //console.log('Trying to send data...');
 
       // Fetch result
-      const response = await fetch('http://localhost:8080/api', {
+      const response = await fetch('https://unit-converter-backend.onrender.com/api', {
         method: 'POST',
         headers: {
           'Content-Type': "application/json",
