@@ -7,8 +7,8 @@ const Nav = () => {
 
   // Define links in an array of objects
   const navLinks = [
-    { path: '/', label: 'Home' },
-    { path: '/about', label: 'About' },
+    // { path: '/', label: 'Home' },
+    // { path: '/about', label: 'About' },
   ];
 
   const toggleMenu = () => {
@@ -22,7 +22,7 @@ const Nav = () => {
         <a href='https://github.com/JevonThompsonx' className="text-white font-bold">WebDevJev</a>
         {/* Desktop Links */}
         <div className="hidden sm:flex space-x-4">
-          {navLinks.map(({ path, label }) => (
+          {navLinks && navLinks.map(({ path, label }) => (
             <NavLink
               key={path}
               to={path}
