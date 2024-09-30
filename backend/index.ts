@@ -8,21 +8,21 @@ const app = new Hono().basePath("/api")
 const port = process.env.PORT || 8080
 app.use(cors())
 app.post('/', async (c) => {
-  console.log('Request from frontend on backend print...')
+  //console.log('Request from frontend on backend print...')
   const { amount_to_convert, unit_convert_from, unit_convert_to } = await c.req.json()
   const data = {
     amount_to_convert: amount_to_convert,
     unit_convert_from: unit_convert_from,
     unit_convert_to: unit_convert_to
   }
-  console.log(data)
-  console.log("Converting...")
+  //console.log(data)
+  //console.log("Converting...")
   const convertedResult: number = convert_units(amount_to_convert).from(unit_convert_from).to(unit_convert_to)
   const conversionObject = {
     convertedResult: `${Math.round(convertedResult)}${unit_convert_to}`,
     original: `${amount_to_convert}${unit_convert_from}`
   }
-  console.log(conversionObject)
+  //console.log(conversionObject)
   return c.json({ data, conversionObject })
 })
 Bun.serve({

@@ -1,6 +1,6 @@
 const handleSubmit = async ({ e, amount_to_convert, unit_convert_from, unit_convert_to }: SubmitHandlerProps) => {
   e.preventDefault();
-  console.log('Got the submit...');
+  //console.log('Got the submit...');
 
   // Check if the values exist before parsing
   if (amount_to_convert.current?.value && unit_convert_from.current?.value && unit_convert_to.current?.value) {
@@ -11,7 +11,7 @@ const handleSubmit = async ({ e, amount_to_convert, unit_convert_from, unit_conv
         unit_convert_to: unit_convert_to?.current?.value,
       };
 
-      console.log('Trying to send data...');
+      //console.log('Trying to send data...');
 
       // Fetch result
       const response = await fetch('http://localhost:8080/api', {
@@ -22,7 +22,7 @@ const handleSubmit = async ({ e, amount_to_convert, unit_convert_from, unit_conv
         body: JSON.stringify(data), // No need for spread operator since data is already an object
       });
 
-      console.log('Response from backend:');
+      //console.log('Response from backend:');
       return await response.json();
     } catch (error) {
       console.error('Error during fetch operation:', error);
