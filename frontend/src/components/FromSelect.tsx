@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { Context } from "../pages/Home"
 const FromSelect = () => {
-  const { ValidSpan, InValidSpan, UnitsComponent, fromValue, unit_convert_from, validity, units, unitTypes } = useContext(Context)
+  const { ValidSpan, InValidSpan, UnitsComponent, fromValue, unit_convert_from, validity, units, unitTypes, setFromValue } = useContext(Context)
 
 
   return (

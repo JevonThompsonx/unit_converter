@@ -18,12 +18,12 @@ export default function Home() {
   // to & from value state
   const [toValue, setToValue] = useState('');
   const [fromValue, setFromValue] = useState('');
+  const [amount, setAmount] = useState('')
   const [conversionAmount, setConversionAmount] = useState<ConversionResult>()
-  
+
 
   const [unitTypes, setUnitTypes] = useState<Unit_Types>({ ...default_unit_types });
 
-  // Memoize handleUnitType
   const handleUnitType = useCallback((e: React.KeyboardEvent<HTMLButtonElement> | React.MouseEvent<HTMLButtonElement>) => {
     switch ((e.target as HTMLButtonElement).id) {
       case 'weight':
@@ -42,10 +42,10 @@ export default function Home() {
   }, [inactive_unit_types]);
   useEffect(() => {
     checkValidity({ amount_to_convert, unit_convert_from, unit_convert_to, setValidity, validity });
-  }, [toValue, fromValue])
+  }, [toValue, fromValue, amount])
   // form submit
   return (
-    <Context.Provider value={{ ValidSpan, InValidSpan, UnitsComponent, fromValue, unit_convert_from, unit_convert_to, validity, units, unitTypes, toValue, setValidity, handleSubmit, amount_to_convert, handleUnitType, setConversionAmount, conversionAmount, setToValue, setFromValue }}>
+    <Context.Provider value={{ ValidSpan, InValidSpan, UnitsComponent, fromValue, unit_convert_from, unit_convert_to, validity, units, unitTypes, toValue, setValidity, handleSubmit, amount_to_convert, amount, setAmount, handleUnitType, setConversionAmount, conversionAmount, setToValue, setFromValue }}>
       <Nav />
 
       <div className="flex flex-col justify-evenly items-center w-screen h-screen p-2">
