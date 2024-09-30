@@ -4,7 +4,7 @@ import { checkValidity } from "../utils";
 
 
 const ResetButton = () => {
-  const { setConversionAmount, setToValue, setFromValue, amount_to_convert, unit_convert_from, unit_convert_to, setValidity, validity } = useContext(Context)
+  const { setConversionAmount, setToValue, setFromValue, amount_to_convert, unit_convert_from, unit_convert_to, setValidity, validity, setAmount } = useContext(Context)
   return (
     <>
       <button
@@ -13,7 +13,7 @@ const ResetButton = () => {
           try {
             setToValue('')
             setFromValue('')
-
+            setAmount('')
             checkValidity({ amount_to_convert, unit_convert_from, unit_convert_to, setValidity, validity });
 
           }
