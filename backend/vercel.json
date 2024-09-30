@@ -1,8 +1,8 @@
 {
   "builds": [
-    { "src": "dist/index.js", "use": "@vercel/node" }
+    { "src": "out/index.js", "use": "@vercel/node" }
   ],
   "routes": [
-    { "src": "/(.*)", "dest": "dist/index.js" }
+    { "src": "/(.*)", "dest": "out/index.js" }
   ]
 }
