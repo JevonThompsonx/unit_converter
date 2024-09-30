@@ -38,7 +38,7 @@ export default function Home() {
     }
     setToValue('')
     setFromValue('')
-
+    setAmount('')
   }, [inactive_unit_types]);
   useEffect(() => {
     checkValidity({ amount_to_convert, unit_convert_from, unit_convert_to, setValidity, validity });
