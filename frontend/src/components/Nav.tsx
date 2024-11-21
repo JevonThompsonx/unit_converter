@@ -1,12 +1,11 @@
 // src/components/Nav.jsx
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   // Define links in an array of objects
-  const navLinks = [
+  const navLinks: NavLinksType = [
     // { path: '/', label: 'Home' },
     // { path: '/about', label: 'About' },
   ];
